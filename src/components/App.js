@@ -1,6 +1,8 @@
-import React, { useReducer, } from "react";
+import React, { useReducer } from "react";
 import { reducer, initialState } from "../state/reducer";
-import PublishMessage from './PublishMessage';
+import PublishMessage from "./PublishMessage";
+import MessageBoard from "./MessageBoard";
+import Context from "../context";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -8,11 +10,15 @@ function App() {
   console.log("state", state);
 
   return (
-    <div>
-      <h2>Reaction</h2>
-      <hr/>
-      <PublishMessage dispatch={dispatch} />
-    </div>
+    <Context.Provider value={{state, dispatch}}>
+      <div>
+        <h2>Reaction</h2>
+        <hr />
+        <PublishMessage />
+        <hr />
+        <MessageBoard />
+      </div>
+    </Context.Provider>
   );
 }
 
