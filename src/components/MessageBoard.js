@@ -1,26 +1,29 @@
 import React from "react";
 import { useAppContext } from "./hooks";
+import CreateReaction from "./CreateReaction";
 
 function MessageBoard() {
-  const {
-    state: { messages },
-  } = useAppContext();
+	const {
+		state: { messages },
+	} = useAppContext();
 
-  return (
-    <div>
-      {messages.map((messageItem) => {
-        const { id, text, timestamp } = messageItem;
+	return (
+		<div>
+			{messages.map((messageItem) => {
+				const { id, text, username, timestamp } = messageItem;
 
-        return (
-          <div key={id}>
-            <h4>{new Date(timestamp).toLocaleString()}</h4>
-            <p>{text}</p>
-            <hr />
-          </div>
-        );
-      })}
-    </div>
-  );
+				return (
+					<div key={id}>
+						<h4>{new Date(timestamp).toLocaleString()}</h4>
+						<p>{text}</p>
+						<h5>_{username}_</h5>
+						<CreateReaction />
+						<hr />
+					</div>
+				);
+			})}
+		</div>
+	);
 }
 
 export default MessageBoard;
